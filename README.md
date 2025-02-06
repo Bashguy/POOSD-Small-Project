@@ -1,6 +1,6 @@
 # POOSD-Small-Project
 
-#Contributers<br/>
+# Contributers<br/>
 Ethan Robotham (API) <br/>
 Christopher Januario (API)<br/>
 Christian Costa (Front End)<br/>
