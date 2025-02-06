@@ -1,10 +1,10 @@
 # POOSD-Small-Project
 
-#Contributers
-Ethan Robotham (API)
-Christopher Januario (API)
-Christian Costa (Front End)
-Jet Chen (Front-End)
-Sameer Bashir (Database)
-Hayden Garner (Flex)
+#Contributers<br/>
+Ethan Robotham (API) <br/>
+Christopher Januario (API)<br/>
+Christian Costa (Front End)<br/>
+Jet Chen (Front-End)<br/>
+Sameer Bashir (Database)<br/>
+Hayden Garner (Flex)<br/>
 Brian Pires (Project Manager)
