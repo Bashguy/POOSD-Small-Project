@@ -35,4 +35,7 @@ INSERT INTO logins (FirstName, LastName, Logged, Pass) VALUES
 
 INSERT INTO contacts (FirstName, LastName, PhoneNumber, Email, IDnum) VALUES
 ('Ameer', 'Ashir', '1111111111', 'shir@gmail.com', '1'),
-('b', 'c', '2222222222', 'd@gmail.com', '2');
+('b', 'c', '2222222222', 'd@gmail.com', '2'),
+('d', 'e', '3333333333', 'f@gmail.com', '3'),
+('f', 'g', '4444444444', 'h@gmail.com', '4'),
+('h', 'i', '5555555555', 'j@gmail.com', '5');
