@@ -12,6 +12,18 @@ switch ($_SERVER['REQUEST_URI']) {
             exit();
         }
         break;
+    case '/login':
+        if (!isLoggedIn()) {
+            header('Location: /login.html');
+            exit();
+        }
+        break;
+    case '/register':
+        if (!isLoggedIn()) {
+            header('Location: /register.html');
+            exit();
+        }
+        break;
 }
 
 // Your other code here

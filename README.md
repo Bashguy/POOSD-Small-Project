@@ -3,8 +3,9 @@
 
 ## Usage
 1. Open a web browser and navigate to `http://smallproject.cjanua.xyz/`.
-    - `/` Displays `index.html` / login
-    - `/login` Displays `index.html` / login
+    - `/` Redirects to `/login` if not logged in
+    - `/login` Displays `login.html` / login
+    - `/register` Displays `register.html` / login
 
 ## Contributers
 - Ethan Robotham (API)
@@ -21,3 +22,6 @@ Message Chris
 - ch436608@ucf.edu
 
 
+### Log major changes here:
+    - 2/10 9 PM
+        - Merge Branches together on Bitnami and working index.php
