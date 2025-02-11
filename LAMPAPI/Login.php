@@ -5,7 +5,6 @@
 	$id = 0;
 	$firstName = "";
 	$lastName = "";
-
     
 	$conn = new mysqli("localhost", "root", "", "ContactManager"); 	
 	if( $conn->connect_error )
