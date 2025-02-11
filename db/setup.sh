@@ -22,7 +22,7 @@ database_exists() {
     return $?
 }
 
-SQL_FILE="/home/bitnami/htdocs/SQL/00_schema_init.sql"
+SQL_FILE="/home/bitnami/htdocs/db/SQL/00_schema_init.sql"
 
 # Main execution
 if database_exists; then
