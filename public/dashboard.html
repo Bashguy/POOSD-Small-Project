@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="../css/style_dashboard.css">
+    <link rel="stylesheet" href="css/style_dashboard.css">
 </head>
 <body>
     <div id ="top">
@@ -14,11 +14,25 @@
         <div id = "left-side">
             <p>Manage Contacts</p>
             <p><br></p>
+            <input type="search" name="Search" placeholder="Search. . ." />
             <p><br></p>
-            <input type="search" id="searchCONTACT" placeholder="Search. . ." />
-            <p><br></p>
-            <p><br></p>
-            <button type = "submit" class = "btn"><img src="../img/plus.png" id = "plusIcon"/>Add Contact</button>
+
+            <p>New Contact</p>
+            <form action="dashboard.php" method="post">
+                <div class="input-field">
+                    <input type="text" name="FirstName" placeholder="First Name" required>
+                </div>
+                <div class="input-field">
+                    <input type="text" name="LastName" placeholder="Last Name" required>
+                </div>
+                <div class="input-field">
+                    <input type="email" name="Email" placeholder="Email" required>
+                </div>
+                <div class="input-field">
+                    <input type="text" name="Number" placeholder="Phone Number" required>
+                </div>
+                <button type = "submit" class = "btn"><img src="../img/plus.png" id = "plusIcon"/>Add Contact</button>
+            </form>
             <div id = "logoutBox">
                 <button type = "submit" class = "btn">Logout</button>
             </div>
