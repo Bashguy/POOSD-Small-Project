@@ -7,14 +7,24 @@
     <link rel="stylesheet" href="css/style_dashboard.css">
 </head>
 <body>
-    <div id ="top">
+    <!--Header-->
+    <div id="top">
         <p>Contact Manager</p>
     </div>
-    <div id = "main">
-        <div id = "left-side">
-            <p>Manage Contacts</p>
+
+    <!--Main Content-->
+    <div id="main">
+
+        <!--left panel with search, add contact, and logout-->
+        <div id="left-side">
+            <div id="left-top">
+                <p>Manage Contacts</p>
+            </div>
             <p><br></p>
-            <input type="search" name="Search" placeholder="Search. . ." />
+            <p>Search Contacts</p>
+            <div class="input-field">
+                <input type="search" name="Search" placeholder="Search. . ." />
+            </div>
             <p><br></p>
 
             <p>New Contact</p>
@@ -35,6 +45,16 @@
             </form>
             <div id = "logoutBox">
                 <button type = "submit" class = "btn">Logout</button>
+            </div>
+        </div>
+
+        <!--middle section with list of contacts-->
+        <div id="middle">
+            <div id="middle-top">
+                <p>Contacts</p>
+            </div>
+            <div id="middle-main">
+                <!--need to get the contacts to populate here-->
             </div>
         </div>
     </div>
