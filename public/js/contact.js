@@ -83,7 +83,7 @@ function doLogin()
 
 				saveCookie();
 	
-				window.location.href = "color.html";
+				window.location.href = "contacts.html";
 			}
 		};
 		xhr.send(jsonPayload);
@@ -105,7 +105,52 @@ function register() {
 
     document.getElementById("registerResult").innerHTML = "";
 
-    
+    let tmp = {firstName: rFirstName, lastName: rLastName, email: rEmail, username: rUsername, password: rPassword};
+
+    let jsonPayload = JSON.stringify(tmp);
+    let url = urlBase + '/Register.' + extension;
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset-UTF-8");
+
+    try {
+
+        xhr.onreadystatechange = function () {
+
+            if (this.readyState == 4 && this.status == 200) {
+
+                let jsonObject = JSON.parse(xhr.responseText);
+
+                if(userId < 1) {
+
+                    document.getElementById("registerResult").innerHTML = "Account already Exists" + jsonObject.err;
+                    return;
+
+                }
+
+                document.getElementById("registerResult").innerHTML = "Nice";
+
+                firstName = jsonObject.firstName;
+				lastName = jsonObject.lastName;
+
+				saveCookie();
+	
+				window.location.href = "login.html";
+
+            }
+
+        };
+
+        xhr.send(jsonPayload);
+
+    }
+
+    catch(err) {
+
+        document.getElementById("registerResult").innerHTML = err.message;
+
+    }
 
 }
 
