@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 session_start();
 require_once 'config.php'; // Database connection file
 
@@ -40,4 +40,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
+ -->

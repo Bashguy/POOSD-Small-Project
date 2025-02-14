@@ -5,23 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
 </head>
 <body>
     <div class="container">
         <h1>Contact Manager</h1>
         <div class="login-box">
-
-            <form action="login.php" method="post">
+            <form onsubmit="doLogin(); return false;">
                 <div class="input-field">
-                    <input type="text" name="Logged" placeholder="Username" required>
+                    <input type="text" id="loginName" name="login" placeholder="Username" required>
                 </div>
                 <div class="input-field">
-                    <input type="password" name="Pass" placeholder="Password" required>
+                    <input type="password" id="loginPassword" name="password" placeholder="Password" required>
                 </div>
                 <button type="submit" class="btn">Login</button>
             </form>
             <p><a href="register.html" class="register-link">Register Here</a></p>
+            <p id="loginResult"></p>
         </div>
     </div>
+    <script src="../js/contact.js"></script>
 </body>
 </html>
