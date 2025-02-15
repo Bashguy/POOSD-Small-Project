@@ -25,3 +25,6 @@ Message Chris
 ### Log major changes here:
     - 2/10 9 PM
         - Merge Branches together on Bitnami and working index.php
+    - 2/14 6 PM
+        - Login API + Website ✅
+        - Register API ✅ + Website ❌
