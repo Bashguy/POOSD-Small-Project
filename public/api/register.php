@@ -1,43 +1,101 @@
-<!-- <?php
-session_start();
-require_once 'config.php'; // Database connection file
+<?php
+header("Access-Control-Allow-Origin: http://smallproject.cjanua.xyz");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $firstName = trim($_POST['FirstName']);
-    $lastName = trim($_POST['LastName']);
-    $email = trim($_POST['Email']);
-    $username = trim($_POST['Logged']);
-    $password = password_hash($_POST['Pass'], PASSWORD_DEFAULT); // Hash the password
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
 
-    try {
-        $pdo = new PDO(DB_DSN, DB_USER, DB_PASS);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$inData = getRequestInfo();
 
-        // Check if username or email already exists
-        $stmt = $pdo->prepare("SELECT * FROM logins WHERE Logged = :username OR Email = :email");
-        $stmt->execute(['username' => $username, 'email' => $email]);
-        if ($stmt->rowCount() > 0) {
-            echo "<script>alert('Username or Email already exists.'); window.location.href='register.html';</script>";
-            exit();
-        }
+// Initialize all variables to prevent null values
+$firstName = isset($inData["firstName"]) ? $inData["firstName"] : "";
+$lastName = isset($inData["lastName"]) ? $inData["lastName"] : "";
+$username = isset($inData["username"]) ? $inData["username"] : "";
+$password = isset($inData["password"]) ? $inData["password"] : "";
 
-        // Insert new user
-        $stmt = $pdo->prepare("INSERT INTO logins (FirstName, LastName, Logged, Pass) VALUES (:first_name, :last_name, :username, :password)");
-        $stmt->execute([
-            'first_name' => $firstName,
-            'last_name' => $lastName,
-            'username' => $username,
-            'password' => $password
-        ]);
+// Validate required fields
+if (empty($firstName) || empty($lastName) || empty($username) || empty($password)) {
+    returnWithError("All fields are required");
+    exit();
+}
 
-        // Retrieve user ID and set session
-        $userID = $pdo->lastInsertId();
-        $_SESSION['user_id'] = $userID;
-        
-        echo "<script>alert('Registration successful! Please log in.'); window.location.href='login.html';</script>";
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-    }
+$dbUser = "root";
+$dbPass = "kVIuL:H/t4P8";
+$dbName = "ContactManager";
+
+$conn = new mysqli("localhost", $dbUser, $dbPass, $dbName);
+if ($conn->connect_error) {
+    error_log("Connection failed: " . $conn->connect_error);
+    returnWithError($conn->connect_error);
+    exit();
+}
+
+// Check if username already exists
+$stmt = $conn->prepare("SELECT ID FROM logins WHERE Logged=?");
+if (!$stmt) {
+    error_log("Prepare failed: " . $conn->error);
+    returnWithError($conn->error);
+    $conn->close();
+    exit();
+}
+
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    returnWithError("Username already exists");
+    $stmt->close();
+    $conn->close();
+    exit();
+}
+$stmt->close();
+
+// Insert new user
+$stmt = $conn->prepare("INSERT INTO logins (FirstName, LastName, Logged, Pass) VALUES (?, ?, ?, ?)");
+if (!$stmt) {
+    error_log("Prepare failed: " . $conn->error);
+    returnWithError($conn->error);
+    $conn->close();
+    exit();
+}
+
+$stmt->bind_param("ssss", $firstName, $lastName, $username, $password);
+
+if ($stmt->execute()) {
+    $id = $conn->insert_id;
+    returnWithInfo($firstName, $lastName, $id);
+} else {
+    error_log("Execute failed: " . $stmt->error);
+    returnWithError($stmt->error);
+}
+
+$stmt->close();
+$conn->close();
+
+function getRequestInfo()
+{
+    return json_decode(file_get_contents('php://input'), true);
+}
+
+function sendResultInfoAsJson($obj)
+{
+    header('Content-type: application/json');
+    echo json_encode($obj);
+}
+
+function returnWithError($err)
+{
+    $retValue = array("id" => 0, "firstName" => "", "lastName" => "", "error" => $err);
+    sendResultInfoAsJson($retValue);
+}
+
+function returnWithInfo($firstName, $lastName, $id)
+{
+    $retValue = array("id" => $id, "firstName" => $firstName, "lastName" => $lastName, "error" => "");
+    sendResultInfoAsJson($retValue);
 }
 ?>
- -->
