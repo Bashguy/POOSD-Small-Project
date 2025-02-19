@@ -1,10 +1,13 @@
+//Extenstion for the endpoints and the URL for the API requests
 const urlBase = 'http://smallproject.cjanua.xyz/api';
 const extension = 'php';
 
+//Variables
 let userId = 0;
 let firstName = "";
 let lastName = "";
 
+//Saves the user inforrmation
 function saveCookie() {
 
 	let minutes = 20;
@@ -14,11 +17,14 @@ function saveCookie() {
 
 }
 
+//Reads user information
 function readCookie() {
 
 	userId = -1;
+
 	let data = document.cookie;
 	let splits = data.split(",");
+
 	for(var i = 0; i < splits.length; i++) {
 
 		let thisOne = splits[i].trim();
@@ -41,6 +47,7 @@ function readCookie() {
 
 	}
 	
+	//Redirects if not logged in
 	if( userId < 0 ) {
 
 		window.location.href = "index.html";
@@ -49,6 +56,7 @@ function readCookie() {
 
 }
 
+//Handles user login
 function doLogin() {
 
 	userId = 0;
@@ -107,6 +115,7 @@ function doLogin() {
 
 }
 
+//Handles user registration
 function register() {
 
     let rFirstName = document.getElementById("first-name").value;
@@ -166,6 +175,7 @@ function register() {
 
 }
 
+//Logs out the user and clears storage
 function doLogout() {
 
 	userId = 0;
@@ -176,6 +186,7 @@ function doLogout() {
 
 }
 
+//Creates a new contact
 function add() {
 
 	let contactFirstName = document.getElementById("firstName").value;
@@ -186,7 +197,7 @@ function add() {
 	document.getElementById("contactAddResult").innerHTML = "";
 
 	let tmp = {firstName:contactFirstName, lastName:contactLastName, email:contactEmail, number:contactNumber, userId:userId};
-	let jsonPayload = JSON.stringify( tmp );
+	let jsonPayload = JSON.stringify(tmp);
 
 	let url = urlBase + '/AddContact.' + extension;
 	
@@ -217,6 +228,7 @@ function add() {
 	
 }
 
+//Searches for a contact
 function search() {
 
 	let searchContact = document.getElementById("searchText").value;
@@ -225,7 +237,7 @@ function search() {
 	let contactList = "";
 
 	let tmp = {search:searchContact, userId:userId};
-	let jsonPayload = JSON.stringify( tmp );
+	let jsonPayload = JSON.stringify(tmp);
 
 	let url = urlBase + '/SearchContacts.' + extension;
 	
@@ -270,6 +282,7 @@ function search() {
 	
 }
 
+//Updates contacts
 function edit() {
 
 	let contactFirstName = document.getElementById("firstName").value;
@@ -280,7 +293,7 @@ function edit() {
 	document.getElementById("contactEditResult").innerHTML = "";
 
 	let tmp = {firstName:contactFirstName, lastName:contactLastName, email:contactEmail, number:contactNumber, userId:userId};
-	let jsonPayload = JSON.stringify( tmp );
+	let jsonPayload = JSON.stringify(tmp);
 
 	let url = urlBase + '/edit.' + extension;
 	
@@ -311,12 +324,13 @@ function edit() {
 
 }
 
+//Deletes contacts
 function deleteContact() {
 
 	document.getElementById("contactDeleteResult").innerHTML = "";
 
 	let tmp = {firstName:firstName, lastName:lastName, userId:userId};
-	let jsonPayload = json.stringify(tmp);
+	let jsonPayload = JSON.stringify(tmp);
 
 	let url = urlBase + "/delete." + extension;
 
