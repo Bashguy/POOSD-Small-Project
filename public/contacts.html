@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <script type="text/javascript" src="js/contact.js"></script>
     <link rel="stylesheet" href="css/style_dashboard.css">
 </head>
 <body>
@@ -23,7 +24,9 @@
             <p><br></p>
             <p>Search Contacts</p>
             <div class="input-field">
-                <input type="search" name="Search" placeholder="Search. . ." />
+                <input type="search" id="searchText" name="Search" placeholder="Search. . ." />
+                <p><br></p>
+                <button type = "submit" class = "btn" onclick="search()">Search</button>
             </div>
             <p><br></p>
 
@@ -41,20 +44,19 @@
                 <div class="input-field">
                     <input type="text" name="Number" placeholder="Phone Number" required>
                 </div>
-                <button type = "submit" class = "btn"><img src="../img/plus.png" id = "plusIcon"/>Add Contact</button>
+                <button type = "submit" class = "btn" onclick="add()"><img src="../img/plus.png" id = "plusIcon"/>Add Contact</button>
             </form>
             <div id = "logoutBox">
-                <button type = "submit" class = "btn">Logout</button>
+                <button type = "submit" class = "btn" onclick="doLogout()">Logout</button>
             </div>
         </div>
 
         <!--middle section with list of contacts-->
-        <div id="middle">
-            <div id="middle-top">
+        <div id="contacts">
+            <div id="contacts-top">
                 <p>Contacts</p>
             </div>
-            <div id="middle-main">
-                <!--need to get the contacts to populate here-->
+            <div id="contactslist">
             </div>
         </div>
     </div>
