@@ -27,7 +27,7 @@ $conn = new mysqli("localhost", $dbUser, $dbPass, $dbName);
 if ($conn->connect_error) {
     returnWithError("Connection failed: " . $conn->connect_error);
 } else {
-    $stmt = $conn->prepare("DELETE FROM Contacts WHERE ID = ? AND UserId = ?");
+    $stmt = $conn->prepare("DELETE FROM contacts WHERE ID = ? AND IDnum = ?");
     if (!$stmt) {
         returnWithError("Prepare failed: " . $conn->error);
     } else {
