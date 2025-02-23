@@ -27,24 +27,26 @@
                 <input type="search" id="searchText" name="Search" placeholder="Search. . ." />
                 <p><br></p>
                 <button type = "submit" class = "btn" onclick="search()">Search</button>
+                <span id="contactSearchResult"></span>
             </div>
             <p><br></p>
 
             <p>New Contact</p>
             <form action="dashboard.php" method="post">
                 <div class="input-field">
-                    <input type="text" name="FirstName" placeholder="First Name" required>
+                    <input type="text" name="FirstName" id="firstname" placeholder="First Name" required>
                 </div>
                 <div class="input-field">
-                    <input type="text" name="LastName" placeholder="Last Name" required>
+                    <input type="text" name="LastName" id="lastname" placeholder="Last Name" required>
                 </div>
                 <div class="input-field">
-                    <input type="email" name="Email" placeholder="Email" required>
+                    <input type="email" name="Email" id="email" placeholder="Email" required>
                 </div>
                 <div class="input-field">
-                    <input type="text" name="Number" placeholder="Phone Number" required>
+                    <input type="text" name="Number" id="number" placeholder="Phone Number" required>
                 </div>
                 <button type = "submit" class = "btn" onclick="add()"><img src="../img/plus.png" id = "plusIcon"/>Add Contact</button>
+                <span id="contactAddResult"></span>
             </form>
             <div id = "logoutBox">
                 <button type = "submit" class = "btn" onclick="doLogout()">Logout</button>
@@ -57,6 +59,18 @@
                 <p>Contacts</p>
             </div>
             <div id="contactslist">
+                <!--From what I have seen code is generated here by the PHP files when the load contacts and fetch contacts are complete-->
+            </div>
+        </div>
+
+         <!--right panel where contact info will populate as well as delete and update buttons-->
+        <div id="right-side">
+            <div id="right-top">
+                <p>Contact Information</p>
+            </div>
+            <div id="contactInfo">
+                <p>Click on a contact to view information.</p>
+                <!--This should also update with the PHP files-->
             </div>
         </div>
     </div>
