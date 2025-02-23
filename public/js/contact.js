@@ -117,63 +117,62 @@ function doLogin() {
 
 //Handles user registration
 function register() {
-
     let rFirstName = document.getElementById("first-name").value;
-    let rLastName = document.getElementById("last-name").value;
-    let rEmail = document.getElementById("email").value;
-    let rUsername = document.getElementById("username").value;
-    let rPassword = document.getElementById("password").value;
+    let rLastName  = document.getElementById("last-name").value;
+    let rEmail     = document.getElementById("email").value;
+    let rUsername  = document.getElementById("username").value;
+    let rPassword  = document.getElementById("password").value;
 
     document.getElementById("registerResult").innerHTML = "";
 
-    let tmp = {firstName: rFirstName, lastName: rLastName, email: rEmail, username: rUsername, password: rPassword};
-
+    // The payload matches what your server expects:
+    let tmp = {
+       firstName: rFirstName,
+       lastName:  rLastName,
+       email:     rEmail,
+       username:  rUsername,
+       password:  rPassword
+    };
     let jsonPayload = JSON.stringify(tmp);
-    let url = urlBase + '/Register.' + extension;
+
+    let url = urlBase + '/register.' + extension; // e.g. "http://smallproject.cjanua.xyz/api/register.php"
 
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-type", "application/json; charset-UTF-8");
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
     try {
-
-        xhr.onreadystatechange = function () {
-
+        xhr.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-
                 let jsonObject = JSON.parse(xhr.responseText);
 
-                if(userId < 1) {
-
-                    document.getElementById("registerResult").innerHTML = "Account already Exists" + jsonObject.err;
+                // Make sure you update userId if your API returns an 'id' or 'userId'
+                userId = jsonObject.id; // or userId = jsonObject.userId;
+                
+                if (userId < 1) {
+                    document.getElementById("registerResult").innerHTML =
+                       "Account already exists: " + (jsonObject.err || "");
                     return;
-
                 }
 
+                // Otherwise, success:
                 document.getElementById("registerResult").innerHTML = "Nice";
-
                 firstName = jsonObject.firstName;
-				lastName = jsonObject.lastName;
+                lastName  = jsonObject.lastName;
+                saveCookie();
 
-				saveCookie();
-	
-				window.location.href = "login.html";
-
+                // Then redirect:
+                window.location.href = "login.html";
             }
-
         };
 
         xhr.send(jsonPayload);
-
     }
-
     catch(err) {
-
         document.getElementById("registerResult").innerHTML = err.message;
-
     }
-
 }
+
 
 //Logs out the user and clears storage
 function doLogout() {
