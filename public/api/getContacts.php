@@ -4,8 +4,10 @@ header("Access-Control-Allow-Origin: http://smallproject.cjanua.xyz");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
-
 $inData = getRequestInfo();
+
+// Debugging: Log the received data
+error_log("Received data: " . json_encode($inData));
 
 // Use the same DB credentials as in login.php/register.php
 $dbUser = "root";
@@ -22,10 +24,15 @@ if ($conn->connect_error) {
     } else {
         $stmt->bind_param("i", $inData["IDnum"]);
         if ($stmt->execute()) {
-            if ($stmt->affected_rows > 0) {
-                returnWithMessage("Contacts successfully located.");
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                $contacts = [];
+                while ($row = $result->fetch_assoc()) {
+                    $contacts[] = $row;
+                }
+                sendResultInfoAsJson($contacts);
             } else {
-                returnWithError("Could not locate contact.");
+                returnWithError("User does not have any contacts.");
             }
         } else {
             returnWithError("Error executing locate: " . $stmt->error);
@@ -46,11 +53,6 @@ function sendResultInfoAsJson($obj) {
 
 function returnWithError($err) {
     $retValue = ["error" => $err];
-    sendResultInfoAsJson($retValue);
-}
-
-function returnWithMessage($message) {
-    $retValue = ["message" => $message];
     sendResultInfoAsJson($retValue);
 }
 ?>
