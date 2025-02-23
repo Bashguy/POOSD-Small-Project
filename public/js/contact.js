@@ -116,63 +116,33 @@ function doLogin() {
 }
 
 //Handles user registration
-function register() {
-    let rFirstName = document.getElementById("first-name").value;
-    let rLastName  = document.getElementById("last-name").value;
-    let rEmail     = document.getElementById("email").value;
-    let rUsername  = document.getElementById("username").value;
-    let rPassword  = document.getElementById("password").value;
+function doRegister()
+{
+  // Gather field values from the HTML
+  const payload = {
+    firstName: document.getElementById('firstName').value,
+    lastName:  document.getElementById('lastName').value,
+    username:  document.getElementById('username').value,
+    password:  document.getElementById('password').value
+  };
 
-    document.getElementById("registerResult").innerHTML = "";
-
-    // The payload matches what your server expects:
-    let tmp = {
-       firstName: rFirstName,
-       lastName:  rLastName,
-       email:     rEmail,
-       username:  rUsername,
-       password:  rPassword
-    };
-    let jsonPayload = JSON.stringify(tmp);
-
-    let url = urlBase + '/register.' + extension; // e.g. "http://smallproject.cjanua.xyz/api/register.php"
-
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-
-    try {
-        xhr.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                let jsonObject = JSON.parse(xhr.responseText);
-
-                // Make sure you update userId if your API returns an 'id' or 'userId'
-                userId = jsonObject.id; // or userId = jsonObject.userId;
-                
-                if (userId < 1) {
-                    document.getElementById("registerResult").innerHTML =
-                       "Account already exists: " + (jsonObject.err || "");
-                    return;
-                }
-
-                // Otherwise, success:
-                document.getElementById("registerResult").innerHTML = "Nice";
-                firstName = jsonObject.firstName;
-                lastName  = jsonObject.lastName;
-                saveCookie();
-
-                // Then redirect:
-                window.location.href = "login.html";
-            }
-        };
-
-        xhr.send(jsonPayload);
-    }
-    catch(err) {
-        document.getElementById("registerResult").innerHTML = err.message;
-    }
+  // Send JSON to your endpoint
+  fetch('/api/register.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+    .then((response) => response.json())
+    .then((json) => {
+      // Handle success or error from the server
+      document.getElementById('registerResult').textContent = JSON.stringify(json);
+      // If success, you can redirect or do something else...
+      // window.location.href = 'some-other-page.html';
+    })
+    .catch((err) => {
+      document.getElementById('registerResult').textContent = 'Error: ' + err;
+    });
 }
-
 
 //Logs out the user and clears storage
 function doLogout() {

@@ -2,43 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Registration</title>
-  <link rel="stylesheet" href="../css/styles.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Contact Manager</h1>
-    <div class="register-box">
-      <h2>Register Account</h2>
-      <!-- Let JS handle the submit event: -->
-      <form onsubmit="register(); return false;">
-        <div class="input-field">
-          <input type="text" id="first-name"  placeholder="First Name" required />
-        </div>
-        <div class="input-field">
-          <input type="text" id="last-name"   placeholder="Last Name"  required />
-        </div>
-        <div class="input-field">
-          <input type="email" id="email"      placeholder="Email"      required />
-        </div>
-        <div class="input-field">
-          <input type="text" id="username"    placeholder="Username"   required />
-        </div>
-        <div class="input-field">
-          <input type="password" id="password" placeholder="Password"  required />
-        </div>
-        <button type="submit" class="btn">Register</button>
-      </form>
-
-      <!-- Provide a place for error or success messages: -->
-      <p id="registerResult"></p>
-
-      <p><a href="login.html" class="login-link">Login Here</a></p>
-    </div>
+  <h1>Register</h1>
+  
+  <div>
+    <label>First Name</label>
+    <input type="text" id="firstName" required />
+  </div>
+  
+  <div>
+    <label>Last Name</label>
+    <input type="text" id="lastName" required />
+  </div>
+  
+  <div>
+    <label>Username</label>
+    <input type="text" id="username" required />
+  </div>
+  
+  <div>
+    <label>Password</label>
+    <input type="password" id="password" required />
   </div>
 
-  <!-- Make sure to load contact.js so that the register() function is available: -->
-  <script src="../js/contact.js"></script>
+  <button onclick="doRegister()">Register</button>
+  <p id="registerResult"></p>
+
+  <!-- Include your separate JS file at the bottom -->
+  <script src="js/contact.js"></script>
 </body>
 </html>
