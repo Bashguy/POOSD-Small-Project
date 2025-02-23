@@ -116,9 +116,8 @@ function doLogin() {
 }
 
 //Handles user registration
-function doRegister()
+function doRegister() 
 {
-  // Gather field values from the HTML
   const payload = {
     firstName: document.getElementById('firstName').value,
     lastName:  document.getElementById('lastName').value,
@@ -126,7 +125,6 @@ function doRegister()
     password:  document.getElementById('password').value
   };
 
-  // Send JSON to your endpoint
   fetch('/api/register.php', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -134,13 +132,29 @@ function doRegister()
   })
     .then((response) => response.json())
     .then((json) => {
-      // Handle success or error from the server
-      document.getElementById('registerResult').textContent = JSON.stringify(json);
-      // If success, you can redirect or do something else...
-      // window.location.href = 'some-other-page.html';
+      // If there’s any error from the server
+      if (json.error && json.error.length > 0) 
+      {
+        // If “Username already exists,” show a special popup
+        if (json.error.includes("Username already exists"))
+        {
+          alert("An account with that username already exists. Please choose another username.");
+        } 
+        else
+        {
+          // Otherwise return error
+          alert("Error: " + json.error);
+        }
+      } 
+      else 
+      {
+        alert("Registration successful! Please login");
+        // Optionally redirect after success:
+        // window.location.href = "login.html";
+      }
     })
     .catch((err) => {
-      document.getElementById('registerResult').textContent = 'Error: ' + err;
+      alert("Error: " + err);
     });
 }
 
