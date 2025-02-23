@@ -3,34 +3,57 @@
 <head>
   <meta charset="UTF-8" />
   <title>Registration</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
 </head>
 <body>
-  <h1>Register</h1>
-  
-  <div>
-    <label>First Name</label>
-    <input type="text" id="firstName" required />
-  </div>
-  
-  <div>
-    <label>Last Name</label>
-    <input type="text" id="lastName" required />
-  </div>
-  
-  <div>
-    <label>Username</label>
-    <input type="text" id="username" required />
-  </div>
-  
-  <div>
-    <label>Password</label>
-    <input type="password" id="password" required />
-  </div>
+  <div class="container">
+    <h1>Contact Manager</h1>
+    <div class="register-box">
+      <h2>Register Account</h2>
+      <form onsubmit="doRegister(); return false;">
+        <div class="input-field">
+          <input
+            type="text"
+            id="firstName"
+            placeholder="First Name"
+            required
+          />
+        </div>
+        <div class="input-field">
+          <input
+            type="text"
+            id="lastName"
+            placeholder="Last Name"
+            required
+          />
+        </div>
+        <div class="input-field">
+          <input
+            type="text"
+            id="username"
+            placeholder="Username"
+            required
+          />
+        </div>
+        <div class="input-field">
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
+        </div>
+        <button type="submit" class="btn">Register</button>
+      </form>
 
-  <button onclick="doRegister()">Register</button>
-  <p id="registerResult"></p>
-
-  <!-- Include your separate JS file at the bottom -->
+      <p id="registerResult"></p>
+      <p>
+        <a href="login.html" class="login-link">Login Here</a>
+      </p>
+    </div>
+  </div>
+  
   <script src="js/contact.js"></script>
 </body>
 </html>
