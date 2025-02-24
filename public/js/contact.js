@@ -420,11 +420,13 @@ async function loadContacts() {
                 contactList.innerHTML = ""; // Clear the table before loading new contacts
 
                 for(let i=0; i < contacts.length; i++){
-					let row = document.createElement("tr");
+			let row = document.createElement("tr");
 
                     row.innerHTML = `
-                        <td>${contacts.FirstName}</td>
-                        <td>${contacts.Email}</td>
+                        <td>${contacts[2]}</td>
+			<td>${contacts[3]}</td>
+			<td>${contacts[4]}</td>
+			<td>${contacts[5]}</td>
                         <td>
                             <button class="edit-btn" onclick="window.location.href='EditContact.html?id=${contacts.ID}'">Edit</button>
                             <button class="delete-btn" onclick="deleteContact(${contacts.ID})">Delete</button>
