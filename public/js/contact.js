@@ -349,8 +349,7 @@ function deleteContact() {
 async function loadContacts() {
 
     let url = urlBase + "/getContacts." + extension;
-    let jsonPayload = JSON.stringify({ user_id: userId });
-    console.log(jsonPayload);
+    let jsonPayload = JSON.stringify({ IDnum: userId });
 
     fetch(url, {
       method: "POST",
