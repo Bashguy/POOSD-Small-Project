@@ -3,12 +3,6 @@
 
     $inData = json_decode(file_get_contents('php://input'), true);
 
-    // Validate userId
-    if (!isset($inData['userId']) || !is_numeric($inData['userId'])) {
-        echo json_encode(["error" => "Invalid user ID"]);
-        exit();
-    }
-
     // Use the same DB credentials as in login.php/register.php
     $dbUser = "root";
     $dbPass = "kVIuL:H/t4P8";
