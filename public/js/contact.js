@@ -171,46 +171,47 @@ function doLogout() {
 
 //Creates a new contact
 function add() {
+    let contactFirstName = document.getElementById("firstname").value;
+    let contactLastName = document.getElementById("lastname").value;
+    let contactEmail = document.getElementById("email").value;
+    let contactNumber = document.getElementById("number").value;
 
-	let contactFirstName = document.getElementById("firstName").value;
-	let contactLastName = document.getElementById("lastName").value;
-	let contactEmail = document.getElementById("email").value;
-	let contactNumber = document.getElementById("number").value;
+    document.getElementById("contactAddResult").innerHTML = "";
 
-	document.getElementById("contactAddResult").innerHTML = "";
+    let tmp = {
+        FirstName: contactFirstName,
+        LastName: contactLastName,
+        Email: contactEmail,
+        PhoneNumber: contactNumber,
+        IDnum: userId
+    };
+    let jsonPayload = JSON.stringify(tmp);
 
-	let tmp = {FirstName:contactFirstName, LastName:contactLastName, Email:contactEmail, PhoneNumber:contactNumber, IDnum:userId};
-	let jsonPayload = JSON.stringify(tmp);
+    let url = urlBase + '/Create.' + extension;
 
-	let url = urlBase + '/Create.' + extension;
-	
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try {
+    console.log("Sending data to server:", jsonPayload); // Debugging statement
 
-		xhr.onreadystatechange = function() {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try {
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4) {
+                console.log("Server response:", this.responseText); // Debugging statement
+                if (this.status == 200) {
+                    document.getElementById("contactAddResult").innerHTML = "Contact has been added";
+                    loadContacts(); // Reload contacts after adding
+                } else {
+                    document.getElementById("contactAddResult").innerHTML = "Error adding contact";
+                }
+            }
+        };
 
-			if (this.readyState == 4 && this.status == 200) {
-
-				document.getElementById("contactAddResult").innerHTML = "Contact has been added";
-
-			}
-
-		};
-
-		xhr.send(jsonPayload);
-
-	}
-
-	catch(err) {
-
-		document.getElementById("contactAddResult").innerHTML = err.message;
-
-	}
-
-	loadContacts();
-	
+        xhr.send(jsonPayload);
+		loadContacts();
+    } catch (err) {
+        document.getElementById("contactAddResult").innerHTML = err.message;
+    }
 }
 
 //Searches for a contact
