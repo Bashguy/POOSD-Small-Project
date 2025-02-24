@@ -420,20 +420,20 @@ async function loadContacts() {
                 let contactList = document.getElementById("contactList");
                 contactList.innerHTML = ""; // Clear the table before loading new contacts
 
-                contacts.results.forEach((contact) => {
-                    let row = document.createElement("tr");
+                for(let i=0; i < contacts.length; i++){
+					let row = document.createElement("tr");
 
                     row.innerHTML = `
-                        <td>${contact.name}</td>
-                        <td>${contact.email}</td>
+                        <td>${contacts.FirstName}</td>
+                        <td>${contacts.Email}</td>
                         <td>
-                            <button class="edit-btn" onclick="window.location.href='EditContact.html?id=${contact.id}'">Edit</button>
-                            <button class="delete-btn" onclick="deleteContact(${contact.id})">Delete</button>
+                            <button class="edit-btn" onclick="window.location.href='EditContact.html?id=${contacts.ID}'">Edit</button>
+                            <button class="delete-btn" onclick="deleteContact(${contacts.ID})">Delete</button>
                         </td>
                     `;
 
                     contactList.appendChild(row);
-                });
+				}
 
                 if (contacts.results.length === 0) {
                     let noResultsRow = document.createElement("tr");
