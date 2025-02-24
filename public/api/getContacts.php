@@ -1,8 +1,5 @@
 <?php
     header("Content-Type: application/json; charset=UTF-8");
-    header("Access-Control-Allow-Origin: http://smallproject.cjanua.xyz");
-    header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-    header("Access-Control-Allow-Headers: Content-Type");
 
     $inData = json_decode(file_get_contents('php://input'), true);
 
