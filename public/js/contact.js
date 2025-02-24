@@ -365,3 +365,15 @@ async function loadContacts() {
 
     xhr.send(jsonPayload);
 }
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+window.onload = function () {
+    if (window.location.pathname.endsWith('contacts.html')) {
+        readCookie();
+        //console.log("User ID: " + iduser); //DEBUG
+        loadContacts();
+    }
+}
