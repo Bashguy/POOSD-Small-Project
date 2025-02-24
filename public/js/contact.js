@@ -355,7 +355,7 @@ async function loadContacts() {
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
-    let payload = { IDnum: userID }; // Ensure the correct user ID is sent
+    let payload = { IDnum: userId }; // Ensure the correct user ID is sent
     let jsonPayload = JSON.stringify(payload);
 
     xhr.onreadystatechange = function () {
