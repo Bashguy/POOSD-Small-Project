@@ -417,7 +417,7 @@ async function loadContacts() {
 			console.log(xhr.responseText);
 			let contactListHTML = "";
 
-			contacts.results.foreach((element) =>{
+			contacts.results.forEach((contact) =>{
 			let row = document.createElement("tr");
 
 			row.innerHTML = `
