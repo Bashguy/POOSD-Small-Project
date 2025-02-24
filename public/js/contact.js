@@ -360,24 +360,19 @@ async function loadContacts() {
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            try {
-                let contacts = JSON.parse(xhr.responseText);
-                let contactListHTML = "";
 
-                contacts.results.forEach(contact => {
-                    contactListHTML += `
-                        <div class="contact-item" onclick="showContactInfo(${contact.id})">
-                            <p>${contact.firstName} ${contact.lastName}</p>
-                            <p>${contact.email}</p>
-                            <p>${contact.number}</p>
-                        </div>
-                    `;
-                });
+			let contacts = JSON.parse(xhr.responseText);
+			let contactListHTML = "";
 
-                document.getElementById("contactslist").innerHTML = contactListHTML;
-            } catch (e) {
-                console.error("Error parsing response:", e);
-            }
+			for(let i=0; i<contacts.results.length; i++)
+			{
+				contactListHTML += contacts.results[i];
+				if(i < contacts.results.length - 1)
+				{
+					contactListHTML += "<br />\r\n";
+				}	
+			}
+			document.getElementsByTagName("p")[0].innerHTML = contactsListHTML;
         }
     };
 
