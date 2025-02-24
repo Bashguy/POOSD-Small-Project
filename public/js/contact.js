@@ -346,6 +346,7 @@ function deleteContact() {
 
 }
 
+/*
 async function loadContacts() {
 
     let url = urlBase + "/getContacts." + extension;
@@ -365,18 +366,18 @@ async function loadContacts() {
 
         let contactList = document.getElementById("contactList");
         contactList.innerHTML = ""; // Clear the table before loading new contacts
+		
+		console.log(jsonResponse.results); //DEBUG
 
-	console.log(jsonResponse.results); //DEBUG
-	      
-        jsonResponse.results.forEach((contacts) => {
+        jsonResponse.results.forEach((contact) => {
           let row = document.createElement("tr");
 
           row.innerHTML = `
-                <td>${contacts.name}</td>
-                <td>${contacts.email}</td>
+                <td>${contact.name}</td>
+                <td>${contact.email}</td>
                 <td>
-                <button class="edit-btn" onclick="window.location.href='EditContact.html?id=${contacts.id}'">Edit</button>
-                <button class="delete-btn" onclick="deleteContact(${contacts.id})">Delete</button>
+                <button class="edit-btn" onclick="window.location.href='EditContact.html?id=${contact.id}'">Edit</button>
+                <button class="delete-btn" onclick="deleteContact(${contact.id})">Delete</button>
                 </td>
 
             `;
@@ -395,8 +396,8 @@ async function loadContacts() {
         alert("An error occurred while loading contacts. Please try again.");
       });
   }
+*/
 
-/*
 async function loadContacts() {
     await delay(400);
 
@@ -416,21 +417,26 @@ async function loadContacts() {
 			console.log(xhr.responseText);
 			let contactListHTML = "";
 
-			for(let i=0; i<contacts.results.length; i++)
-			{
-				contactListHTML += contacts.results[i];
-				if(i < contacts.results.length - 1)
-				{
-					contactListHTML += "<br />\r\n";
-				}	
-			}
-			document.getElementsByTagName("p")[0].innerHTML = contactsListHTML;
+			contacts.results.foreach((contact) =>{
+			let row = document.createElement("tr");
+
+			row.innerHTML = `
+				  <td>${contact.name}</td>
+				  <td>${contact.email}</td>
+				  <td>
+				  <button class="edit-btn" onclick="window.location.href='EditContact.html?id=${contact.id}'">Edit</button>
+				  <button class="delete-btn" onclick="deleteContact(${contact.id})">Delete</button>
+				  </td>
+  
+			  `;
+  
+			contactList.appendChild(row);
+		  });
         }
     };
 
     xhr.send(jsonPayload);
 }
-*/
 
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
