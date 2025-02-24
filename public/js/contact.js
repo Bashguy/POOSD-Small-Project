@@ -412,26 +412,37 @@ async function loadContacts() {
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
+            let contacts = JSON.parse(xhr.responseText);
+            console.log(xhr.responseText);
 
-			let contacts = JSON.parse(xhr.responseText);
-			console.log(xhr.responseText);
-			let contactListHTML = "";
+            if (contacts && contacts.results) {
+                let contactList = document.getElementById("contactList");
+                contactList.innerHTML = ""; // Clear the table before loading new contacts
 
-			contacts.results.forEach((contact) =>{
-			let row = document.createElement("tr");
+                contacts.results.forEach((contact) => {
+                    let row = document.createElement("tr");
 
-			row.innerHTML = `
-				  <td>${contact.name}</td>
-				  <td>${contact.email}</td>
-				  <td>
-				  <button class="edit-btn" onclick="window.location.href='EditContact.html?id=${contact.id}'">Edit</button>
-				  <button class="delete-btn" onclick="deleteContact(${contact.id})">Delete</button>
-				  </td>
-  
-			  `;
-  
-			contactList.appendChild(row);
-		  });
+                    row.innerHTML = `
+                        <td>${contact.name}</td>
+                        <td>${contact.email}</td>
+                        <td>
+                            <button class="edit-btn" onclick="window.location.href='EditContact.html?id=${contact.id}'">Edit</button>
+                            <button class="delete-btn" onclick="deleteContact(${contact.id})">Delete</button>
+                        </td>
+                    `;
+
+                    contactList.appendChild(row);
+                });
+
+                if (contacts.results.length === 0) {
+                    let noResultsRow = document.createElement("tr");
+                    noResultsRow.innerHTML = `<td colspan="3" style="text-align: center;">No contacts found</td>`;
+                    contactList.appendChild(noResultsRow);
+                }
+            } else {
+                console.error("Error: contacts or contacts.results is undefined");
+                alert("An error occurred while loading contacts. Please try again.");
+            }
         }
     };
 
