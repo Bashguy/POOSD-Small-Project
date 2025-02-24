@@ -366,6 +366,8 @@ async function loadContacts() {
         let contactList = document.getElementById("contactList");
         contactList.innerHTML = ""; // Clear the table before loading new contacts
 
+	console.log(jsonResponse.results); //DEBUG
+	      
         jsonResponse.results.forEach((contacts) => {
           let row = document.createElement("tr");
 
