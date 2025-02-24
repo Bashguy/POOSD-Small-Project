@@ -423,20 +423,20 @@ async function loadContacts() {
 			let row = document.createElement("tr");
 
                     row.innerHTML = `
-                        <td>${contacts[2]}</td>
-			<td>${contacts[3]}</td>
-			<td>${contacts[4]}</td>
-			<td>${contacts[5]}</td>
-                        <td>
-                            <button class="edit-btn" onclick="window.location.href='EditContact.html?id=${contacts.ID}'">Edit</button>
-                            <button class="delete-btn" onclick="deleteContact(${contacts.ID})">Delete</button>
-                        </td>
+                        <td>${contacts[i].FirstName}</td>
+			<td>${contacts[i].LastName}</td>
+			<td>${contacts[i].Email}</td>
+			<td>${contacts[i].PhoneNumber}</td>
+			<td>
+				<button class="edit-btn" onclick="window.location.href='EditContact.html?id=${contacts[i].ID}'">Edit</button>
+				<button class="delete-btn" onclick="deleteContact(${contacts[i].ID})">Delete</button>
+			</td>
                     `;
 
                     contactList.appendChild(row);
 		}
 
-                if (contacts.results.length === 0) {
+                if (contacts.length === 0) {
                     let noResultsRow = document.createElement("tr");
                     noResultsRow.innerHTML = `<td colspan="3" style="text-align: center;">No contacts found</td>`;
                     contactList.appendChild(noResultsRow);
