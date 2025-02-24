@@ -421,11 +421,11 @@ async function loadContacts() {
 			let row = document.createElement("tr");
 
 			row.innerHTML = `
-				  <td>${contacts.name}</td>
-				  <td>${contacts.email}</td>
+				  <td>${contact.name}</td>
+				  <td>${contact.email}</td>
 				  <td>
-				  <button class="edit-btn" onclick="window.location.href='EditContact.html?id=${contacts.id}'">Edit</button>
-				  <button class="delete-btn" onclick="deleteContact(${contacts.id})">Delete</button>
+				  <button class="edit-btn" onclick="window.location.href='EditContact.html?id=${contact.id}'">Edit</button>
+				  <button class="delete-btn" onclick="deleteContact(${contact.id})">Delete</button>
 				  </td>
   
 			  `;
