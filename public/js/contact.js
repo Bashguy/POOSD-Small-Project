@@ -391,7 +391,7 @@ function delay(ms) {
 window.onload = function () {
     if (window.location.pathname.endsWith('contacts.html')) {
         readCookie(); // Ensure `userId` is read
-	console.log("User ID: " + iduser); //DEBUG
+	console.log("User ID: " + userId); //DEBUG
         if (userId > 0) {
             loadContacts();
         }
