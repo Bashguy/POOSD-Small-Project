@@ -32,7 +32,7 @@
             <p><br></p>
 
             <p>New Contact</p>
-            <form action="dashboard.php" method="post">
+            <form onsubmit="add(); return false">
                 <div class="input-field">
                     <input type="text" name="FirstName" id="firstname" placeholder="First Name" required>
                 </div>
@@ -45,7 +45,7 @@
                 <div class="input-field">
                     <input type="text" name="Number" id="number" placeholder="Phone Number" required>
                 </div>
-                <button type = "submit" class = "btn" onclick="add()"><img src="../img/plus.png" id = "plusIcon"/>Add Contact</button>
+                <button type = "submit" class = "btn"><img src="../img/plus.png" id = "plusIcon"/>Add Contact</button>
                 <span id="contactAddResult"></span>
             </form>
             <div id = "logoutBox">
