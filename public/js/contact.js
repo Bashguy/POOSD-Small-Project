@@ -362,6 +362,7 @@ async function loadContacts() {
         if (xhr.readyState === 4 && xhr.status === 200) {
 
 			let contacts = JSON.parse(xhr.responseText);
+			console.log(xhr.responseText);
 			let contactListHTML = "";
 
 			for(let i=0; i<contacts.results.length; i++)
