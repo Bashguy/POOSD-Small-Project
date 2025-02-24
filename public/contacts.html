@@ -29,7 +29,6 @@
                 <button type = "submit" class = "btn" onclick="search()">Search</button>
                 <span id="contactSearchResult"></span>
             </div>
-            <p><br></p>
 
             <p>New Contact</p>
             <form onsubmit="add(); return false">
@@ -46,6 +45,8 @@
                     <input type="text" name="Number" id="number" placeholder="Phone Number" required>
                 </div>
                 <button type = "submit" class = "btn"><img src="../img/plus.png" id = "plusIcon"/>Add Contact</button>
+                <p><br></p>
+                <span id="contactAddResult"></span>
             </form>
             <div id = "logoutBox">
                 <button type = "submit" class = "btn" onclick="doLogout()">Logout</button>
