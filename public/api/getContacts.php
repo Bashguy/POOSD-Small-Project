@@ -9,10 +9,15 @@
         exit();
     }
 
+    // Use the same DB credentials as in login.php/register.php
+    $dbUser = "root";
+    $dbPass = "kVIuL:H/t4P8";
+    $dbName = "ContactManager";
+
     $userId = intval($inData['userId']);
 
     // Database connection
-    $conn = new mysqli("localhost", "username", "password", "database_name");
+    $conn = new mysqli("localhost", $dbUser, $dbPass, $dbName);
     if ($conn->connect_error) {
         echo json_encode(["error" => $conn->connect_error]);
         exit();
