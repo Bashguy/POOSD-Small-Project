@@ -349,19 +349,35 @@ function deleteContact() {
 async function loadContacts() {
     await delay(400);
 
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", urlBase + "/getContacts.php", true);
+    let xhr = new XMLHttpRequest();
+    let url = urlBase + "/getContacts." + extension; // Ensure consistent URL format
+
+    xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
-    let payload = {
-        iduser: iduser,
-    };
-
+    let payload = { userId: userId }; // Ensure the correct user ID is sent
     let jsonPayload = JSON.stringify(payload);
 
     xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            document.getElementById("contactslist").innerHTML = xhr.responseText;
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            try {
+                let contacts = JSON.parse(xhr.responseText);
+                let contactListHTML = "";
+
+                contacts.results.forEach(contact => {
+                    contactListHTML += `
+                        <div class="contact-item" onclick="showContactInfo(${contact.id})">
+                            <p>${contact.firstName} ${contact.lastName}</p>
+                            <p>${contact.email}</p>
+                            <p>${contact.number}</p>
+                        </div>
+                    `;
+                });
+
+                document.getElementById("contactslist").innerHTML = contactListHTML;
+            } catch (e) {
+                console.error("Error parsing response:", e);
+            }
         }
     };
 
@@ -374,8 +390,9 @@ function delay(ms) {
 
 window.onload = function () {
     if (window.location.pathname.endsWith('contacts.html')) {
-        readCookie();
-        //console.log("User ID: " + iduser); //DEBUG
-        loadContacts();
+        readCookie(); // Ensure `userId` is read
+        if (userId > 0) {
+            loadContacts();
+        }
     }
 }
