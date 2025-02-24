@@ -182,7 +182,7 @@ function add() {
 	let tmp = {firstName:contactFirstName, lastName:contactLastName, email:contactEmail, number:contactNumber, userId:userId};
 	let jsonPayload = JSON.stringify(tmp);
 
-	let url = urlBase + '/AddContact.' + extension;
+	let url = urlBase + '/Create.' + extension;
 	
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -342,4 +342,26 @@ function deleteContact() {
 		
 	}
 
+}
+
+async function loadContacts() {
+    await delay(400);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", urlBase + "/getContacts.php", true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    let payload = {
+        iduser: iduser,
+    };
+
+    let jsonPayload = JSON.stringify(payload);
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            document.getElementById("contactslist").innerHTML = xhr.responseText;
+        }
+    };
+
+    xhr.send(jsonPayload);
 }
