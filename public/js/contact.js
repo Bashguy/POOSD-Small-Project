@@ -412,26 +412,35 @@ async function loadContacts() {
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
+            let contacts = JSON.parse(xhr.responseText);
+            console.log(xhr.responseText);
+	    console.log(contacts);
 
-			let contacts = JSON.parse(xhr.responseText);
-			console.log(xhr.responseText);
-			let contactListHTML = "";
+                let contactList = document.getElementById("contactList");
+                contactList.innerHTML = ""; // Clear the table before loading new contacts
 
-			contacts.results.foreach((element) =>{
+                for(let i=0; i < contacts.length; i++){
 			let row = document.createElement("tr");
 
-			row.innerHTML = `
-				  <td>${contacts.name}</td>
-				  <td>${contacts.email}</td>
-				  <td>
-				  <button class="edit-btn" onclick="window.location.href='EditContact.html?id=${contacts.id}'">Edit</button>
-				  <button class="delete-btn" onclick="deleteContact(${contacts.id})">Delete</button>
-				  </td>
-  
-			  `;
-  
-			contactList.appendChild(row);
-		  });
+                    row.innerHTML = `
+                        <td>${contacts[i].FirstName}</td>
+			<td>${contacts[i].LastName}</td>
+			<td>${contacts[i].Email}</td>
+			<td>${contacts[i].PhoneNumber}</td>
+			<td>
+				<button class="edit-btn" onclick="window.location.href='EditContact.html?id=${contacts[i].ID}'">Edit</button>
+				<button class="delete-btn" onclick="deleteContact(${contacts[i].ID})">Delete</button>
+			</td>
+                    `;
+
+                    contactList.appendChild(row);
+		}
+
+                if (contacts.length === 0) {
+                    let noResultsRow = document.createElement("tr");
+                    noResultsRow.innerHTML = `<td colspan="3" style="text-align: center;">No contacts found</td>`;
+                    contactList.appendChild(noResultsRow);
+                }
         }
     };
 

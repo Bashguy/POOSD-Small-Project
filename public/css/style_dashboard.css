@@ -127,7 +127,7 @@ body {
 
 #contacts {
     display: block;
-    width: 500px;;
+    width: 100%;
     height: 100vh;
     padding-top: 15px;
     padding-bottom: 16px;
@@ -141,18 +141,54 @@ body {
 #contacts-top {
     display: block;
     border-bottom: 2px solid #213342;
-    width: 500px;
+    width: 100%;
     padding-bottom: 10px;
     text-align: center;
     color: #ffffff;
 }
 
-#contactslist {
+.contacts-table {
     width: 100%;
     height: 70%;
     overflow-y: auto;
     overflow-x: hidden;
 }
+  
+  .contacts-table thead {
+    position: sticky;
+    top: 0;
+    background: gray;
+    z-index: 2;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: gray;
+    table-layout: fixed;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    word-wrap: break-word;
+  }
+  
+  th {
+    text-align: center;
+    background: gray;
+    color: white;
+  }
+  
+  tbody {
+    display: table-row-group;
+  }
+  
+  td:last-child {
+    width: 150px;
+    text-align: center;
+  }
 
 #right-side{
     display: block;
