@@ -179,7 +179,7 @@ function add() {
 
 	document.getElementById("contactAddResult").innerHTML = "";
 
-	let tmp = {firstName:contactFirstName, lastName:contactLastName, email:contactEmail, number:contactNumber, userId:userId};
+	let tmp = {FirstName:contactFirstName, LastName:contactLastName, Email:contactEmail, PhoneNumber:contactNumber, IDnum:userId};
 	let jsonPayload = JSON.stringify(tmp);
 
 	let url = urlBase + '/Create.' + extension;
