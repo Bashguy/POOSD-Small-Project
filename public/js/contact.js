@@ -416,7 +416,6 @@ async function loadContacts() {
             console.log(xhr.responseText);
 	    console.log(contacts);
 
-            if (contacts && contacts.results) {
                 let contactList = document.getElementById("contactList");
                 contactList.innerHTML = ""; // Clear the table before loading new contacts
 
@@ -433,17 +432,13 @@ async function loadContacts() {
                     `;
 
                     contactList.appendChild(row);
-				}
+		}
 
                 if (contacts.results.length === 0) {
                     let noResultsRow = document.createElement("tr");
                     noResultsRow.innerHTML = `<td colspan="3" style="text-align: center;">No contacts found</td>`;
                     contactList.appendChild(noResultsRow);
                 }
-            } else {
-                console.error("Error: contacts or contacts.results is undefined");
-                alert("An error occurred while loading contacts. Please try again.");
-            }
         }
     };
 
