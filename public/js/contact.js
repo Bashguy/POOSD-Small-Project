@@ -208,6 +208,8 @@ function add() {
 		document.getElementById("contactAddResult").innerHTML = err.message;
 
 	}
+
+	loadContacts();
 	
 }
 
