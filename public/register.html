@@ -2,58 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Registration</title>
-  <link rel="stylesheet" href="../css/styles.css" />
-  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Manager - Register</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="js/contact.js"></script>
 </head>
-<body>
-  <div class="container">
-    <h1>Contact Manager</h1>
-    <div class="register-box">
-      <h2>Register Account</h2>
+<body class="register-bg">
+
+  <div class="auth-wrapper">
+    <div class="auth-container">
+      <h1>Contact Manager</h1>
       <form onsubmit="doRegister(); return false;">
-        <div class="input-field">
-          <input
-            type="text"
-            id="firstName"
-            placeholder="First Name"
-            required
-          />
+        <div class="input-group">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
         </div>
-        <div class="input-field">
-          <input
-            type="text"
-            id="lastName"
-            placeholder="Last Name"
-            required
-          />
+
+        <div class="input-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
         </div>
-        <div class="input-field">
-          <input
-            type="text"
-            id="username"
-            placeholder="Username"
-            required
-          />
+
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Choose a username" required>
         </div>
-        <div class="input-field">
-          <input
-            type="password"
-            id="password"
-            placeholder="Password"
-            required
-          />
+
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Create a password" required>
         </div>
-        <button type="submit" class="btn">Register</button>
+
+        <button type="submit" class="auth-btn">Register</button>
       </form>
 
       <p id="registerResult"></p>
-      <p>
-        <a href="login.html" class="login-link">Login Here</a>
-      </p>
+
+      <div class="auth-link">
+         <a href="login.html">Login Here</a>
+      </div>
     </div>
   </div>
-  
-  <script src="js/contact.js"></script>
+
 </body>
 </html>

@@ -1,29 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Manager - Login</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="js/contact.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Contact Manager</h1>
-        <div class="login-box">
-            <form onsubmit="doLogin(); return false;">
-                <div class="input-field">
-                    <input type="text" id="loginName" name="login" placeholder="Username" required>
-                </div>
-                <div class="input-field">
-                    <input type="password" id="loginPassword" name="password" placeholder="Password" required>
-                </div>
-                <button type="submit" class="btn">Login</button>
-            </form>
-            <p><a href="register.html" class="register-link">Register Here</a></p>
-            <p id="loginResult"></p>
-        </div>
+
+  <div class="login-wrapper">
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+      <h2>Manage Your Contacts</h2>
+      <p>
+        Keep your important contacts organized in one secure place and stay connected.
+      </p>
+      <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" alt="Contacts Icon">
     </div>
-    <script src="../js/contact.js"></script>
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+      <div class="form-container">
+        <h1>Contact Manager</h1>
+        <form onsubmit="doLogin(); return false;">
+          <div class="input-group">
+            <label for="username">Username</label>
+            <input type="text" id="loginName" name="username" placeholder="Enter your username" required>
+          </div>
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required>
+          </div>
+
+          <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        <div class="register-link">
+        <a href="register.html">Register Here</a>
+        <p id="loginResult"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
