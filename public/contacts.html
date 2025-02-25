@@ -76,33 +76,34 @@
             </div>
         </div>
 
-        <!-- Modal for editing contact -->
-        <div id="editModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <h2>Edit Contact</h2>
-                <form id="editContactForm">
-                    <div class="input-field">
-                        <label for="editFirstname">First Name</label>
-                        <input type="text" id="editFirstname" name="FirstName" required>
-                    </div>
-                    <div class="input-field">
-                        <label for="editLastname">Last Name</label>
-                        <input type="text" id="editLastname" name="LastName" required>
-                    </div>
-                    <div class="input-field">
-                        <label for="editEmail">Email</label>
-                        <input type="email" id="editEmail" name="Email" required>
-                    </div>
-                    <div class="input-field">
-                        <label for="editNumber">Phone Number</label>
-                        <input type="tel" id="editNumber" name="PhoneNumber" required>
-                    </div>
-                    <button type="button" class="btn" onclick="edit()">Update</button>
-                    <button type="button" class="btn" onclick="closeModal()">Cancel</button>
-                </form>
+       <!-- Modal for editing contact -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Edit Contact</h2>
+        <form id="editContactForm">
+            <input type="hidden" id="editContactId" name="ContactId">
+            <div class="input-field">
+                <label for="editFirstname">First Name</label>
+                <input type="text" id="editFirstname" name="FirstName" required>
             </div>
-        </div>
+            <div class="input-field">
+                <label for="editLastname">Last Name</label>
+                <input type="text" id="editLastname" name="LastName" required>
+            </div>
+            <div class="input-field">
+                <label for="editEmail">Email</label>
+                <input type="email" id="editEmail" name="Email" required>
+            </div>
+            <div class="input-field">
+                <label for="editNumber">Phone Number</label>
+                <input type="tel" id="editNumber" name="PhoneNumber" required>
+            </div>
+            <button type="button" class="btn" onclick="edit()">Update</button>
+            <button type="button" class="btn" onclick="closeModal()">Cancel</button>
+        </form>
+    </div>
+</div>
         
     </div>
 </body>
