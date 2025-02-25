@@ -247,7 +247,7 @@ function edit() {
 
 	document.getElementById("contactEditResult").innerHTML = "";
 
-	let tmp = {id: parseInt(contactId), firstName:contactFirstName, lastName:contactLastName, email:contactEmail, number:contactNumber, IDnum:userId};
+	let tmp = {ID: parseInt(contactId), firstName:contactFirstName, lastName:contactLastName, email:contactEmail, number:contactNumber, IDnum:userId};
 	let jsonPayload = JSON.stringify(tmp);
 
 	let url = urlBase + '/edit.' + extension;
