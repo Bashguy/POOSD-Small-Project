@@ -351,7 +351,7 @@ async function loadContacts() {
                     <td>${contacts[i].Email}</td>
                     <td>${formattedNumber}</td>
                     <td>
-                        <button class="edit-btn" onclick='openModal(${JSON.stringify(contacts[i])})'>Edit</button>
+                        <button class="edit-btn" onclick="window.location.href='EditContact.html?id=${contacts[i].ID}'">Edit</button>
                         <button onclick="deleteContact(${contacts[i].ID})" id="delete">Delete</button>
                     </td>
                 `;
@@ -370,30 +370,20 @@ async function loadContacts() {
     xhr.send(jsonPayload);
 }
 
-// Function to format phone number while typing
-function formatPhoneInput(input) {
-    let cleaned = input.value.replace(/\D/g, ''); // Remove non-digit characters
-    let formatted = '';
-
-    if (cleaned.length > 3 && cleaned.length <= 6) {
-        formatted = `${cleaned.slice(0, 3)}-${cleaned.slice(3)}`;
-    } else if (cleaned.length > 6) {
-        formatted = `${cleaned.slice(0, 3)}-${cleaned.slice(3, 6)}-${cleaned.slice(6, 10)}`;
-    } else {
-        formatted = cleaned;
-    }
-
-    input.value = formatted;
-}
-
-// Format phone number for display
+// Function to format phone number
 function formatPhoneNumber(phoneNumber) {
     if (!phoneNumber) return "";
-    const cleaned = phoneNumber.replace(/\D/g, '');
-    if (cleaned.length === 10) {
-        return `${cleaned.slice(0, 3)}-${cleaned.slice(3, 6)}-${cleaned.slice(6)}`;
+
+    // Remove non-digits
+    const cleaned = ('' + phoneNumber).replace(/\D/g, '');
+
+    // Format as xxx-xxx-xxxx
+    const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+        return `${match[1]}-${match[2]}-${match[3]}`;
     }
-    return phoneNumber;
+
+    return phoneNumber; // Return as-is if not matching expected format
 }
 
 function delay(ms) {
