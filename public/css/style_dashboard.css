@@ -89,7 +89,7 @@ body {
 }
 /* Fine-tuned Search Button Margin */
 #searchText {
-    margin-bottom: 5px; 
+    margin-bottom: 1px; 
 }
 
 #searchText + button.btn {
