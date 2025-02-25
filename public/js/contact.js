@@ -312,7 +312,7 @@ function edit() {
 
 //Deletes contacts
 function deleteContact(contactId) {
-    document.getElementById("contactDeleteResult").innerHTML = "";
+    //document.getElementById("contactDeleteResult").innerHTML = "";
 
     let tmp = { IDnum: userId, id: contactId };
     let jsonPayload = JSON.stringify(tmp);
@@ -325,9 +325,9 @@ function deleteContact(contactId) {
     try {
         xhr.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("contactDeleteResult").innerHTML = "Contact has been deleted";
+                //document.getElementById("contactDeleteResult").innerHTML = "Contact has been deleted";
             } else {
-                document.getElementById("contactDeleteResult").innerHTML = "Error deleting contact";
+                //document.getElementById("contactDeleteResult").innerHTML = "Error deleting contact";
             }
         };
 
@@ -336,7 +336,7 @@ function deleteContact(contactId) {
 		loadContacts(); // Reload contacts after deleting
 
     } catch (err) {
-        document.getElementById("contactDeleteResult").innerHTML = err.message;
+        //document.getElementById("contactDeleteResult").innerHTML = err.message;
     }
 }
 async function loadContacts() {
