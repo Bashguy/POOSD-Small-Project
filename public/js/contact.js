@@ -360,7 +360,7 @@ async function loadContacts() {
                     <td>${contacts[i].Email}</td>
                     <td>${formattedNumber}</td>
                     <td>
-                        <button class="edit-btn" onclick="window.location.href='EditContact.html?id=${contacts[i].ID}'">Edit</button>
+                        <button class="edit-btn" onclick='openModal(${JSON.stringify(contacts[i])})'>Edit</button>
                         <button onclick="deleteContact(${contacts[i].ID})" id="delete">Delete</button>
                     </td>
                 `;
