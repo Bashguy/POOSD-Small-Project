@@ -216,56 +216,35 @@ function add() {
 
 //Searches for a contact
 function search() {
+    let searchContact = document.getElementById("searchText").value.toLowerCase();
+    document.getElementById("contactSearchResult").innerHTML = "";
 
-	let searchContact = document.getElementById("searchText").value;
-	document.getElementById("contactSearchResult").innerHTML = "";
-	
-	let contactList = "";
+    let contactList = document.getElementById("contactList");
+    let rows = contactList.getElementsByTagName("tr");
 
-	let tmp = {search:searchContact, userId:userId};
-	let jsonPayload = JSON.stringify(tmp);
+    for (let i = 0; i < rows.length; i++) {
+        let cells = rows[i].getElementsByTagName("td");
+        let match = false;
 
-	let url = urlBase + '/SearchContacts.' + extension;
-	
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try {
+        for (let j = 0; j < cells.length - 1; j++) { // Exclude the last cell with buttons
+            if (cells[j].innerText.toLowerCase().includes(searchContact)) {
+                match = true;
+                break;
+            }
+        }
 
-		xhr.onreadystatechange = function() {
+        if (match) {
+            rows[i].style.display = "";
+        } else {
+            rows[i].style.display = "none";
+        }
+    }
 
-			if (this.readyState == 4 && this.status == 200) {
-
-				document.getElementById("contactSearchResult").innerHTML = "Contact(s) has been found";
-				let jsonObject = JSON.parse( xhr.responseText );
-				
-				for( let i=0; i<jsonObject.results.length; i++ ) {
-
-					contactList += jsonObject.results[i];
-					if( i < jsonObject.results.length - 1 ) {
-
-						contactList += "<br />\r\n";
-
-					}
-
-				}
-				
-				document.getElementsByTagName("p")[0].innerHTML = contactList;
-
-			}
-
-		};
-
-		xhr.send(jsonPayload);
-
-	}
-
-	catch(err) {
-
-		document.getElementById("contactSearchResult").innerHTML = err.message;
-
-	}
-	
+    if (searchContact === "") {
+        document.getElementById("contactSearchResult").innerHTML = "Please enter a search term.";
+    } else {
+        document.getElementById("contactSearchResult").innerHTML = "Search results updated.";
+    }
 }
 
 //Updates contacts
