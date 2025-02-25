@@ -245,8 +245,6 @@ function edit() {
     let contactEmail = document.getElementById("editEmail").value;
     let contactNumber = document.getElementById("editNumber").value;
 
-    document.getElementById("contactEditResult").innerHTML = "";
-
     let tmp = {
         ID: contactId,
         FirstName: contactFirstName,
@@ -265,17 +263,14 @@ function edit() {
     try {
         xhr.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("contactEditResult").innerHTML = "Contact has been edited";
                 loadContacts(); // Reload contacts after editing
                 closeModal(); // Close the modal
-            } else {
-                document.getElementById("contactEditResult").innerHTML = "Error editing contact";
-            }
+            } 
         };
 
         xhr.send(jsonPayload);
     } catch (err) {
-        document.getElementById("contactEditResult").innerHTML = err.message;
+        console.log(err.message);
     }
 }
 
