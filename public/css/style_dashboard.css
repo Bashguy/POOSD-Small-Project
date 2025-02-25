@@ -80,14 +80,17 @@ body {
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
     margin-top: 10px;
-    margin-bottom: 5px; /* Added to adjust spacing for search button */
+    margin-bottom: 5px;
 }
 
 .btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(110, 142, 251, 0.4);
 }
-
+/* Fine-tuned Search Button Margin */
+#left-side .btn {
+    margin-top: 2px; 
+}
 /* Button Icon Styling */
 #plusIcon {
     width: 12px;
