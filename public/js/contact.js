@@ -312,47 +312,63 @@ async function loadContacts() {
     await delay(400);
 
     let xhr = new XMLHttpRequest();
-    let url = urlBase + "/getContacts." + extension; // Ensure consistent URL format
+    let url = urlBase + "/getContacts." + extension;
 
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
-    let payload = { IDnum: userId }; // Ensure the correct user ID is sent
+    let payload = { IDnum: userId };
     let jsonPayload = JSON.stringify(payload);
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let contacts = JSON.parse(xhr.responseText);
-        
-                let contactList = document.getElementById("contactList");
-                contactList.innerHTML = ""; // Clear the table before loading new contacts
+            let contactList = document.getElementById("contactList");
+            contactList.innerHTML = "";
 
-                for(let i=0; i < contacts.length; i++){
-			let row = document.createElement("tr");
+            for (let i = 0; i < contacts.length; i++) {
+                let formattedNumber = formatPhoneNumber(contacts[i].PhoneNumber);
 
-                    row.innerHTML = `
-                        <td>${contacts[i].FirstName}</td>
-			<td>${contacts[i].LastName}</td>
-			<td>${contacts[i].Email}</td>
-			<td>${contacts[i].PhoneNumber}</td>
-			<td>
-				<button class="edit-btn" onclick="window.location.href='EditContact.html?id=${contacts[i].ID}'">Edit</button>
-				<button onclick="deleteContact(${contacts[i].ID})" id="delete">Delete</button>
-			</td>
-                    `;
+                let row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${contacts[i].FirstName}</td>
+                    <td>${contacts[i].LastName}</td>
+                    <td>${contacts[i].Email}</td>
+                    <td>${formattedNumber}</td>
+                    <td>
+                        <button class="edit-btn" onclick="window.location.href='EditContact.html?id=${contacts[i].ID}'">Edit</button>
+                        <button onclick="deleteContact(${contacts[i].ID})" id="delete">Delete</button>
+                    </td>
+                `;
 
-                    contactList.appendChild(row);
-		}
+                contactList.appendChild(row);
+            }
 
-                if (contacts.length === 0) {
-                    let noResultsRow = document.createElement("tr");
-                    noResultsRow.innerHTML = `<td colspan="3" style="text-align: center;">No contacts found</td>`;
-                    contactList.appendChild(noResultsRow);
-                }
+            if (contacts.length === 0) {
+                let noResultsRow = document.createElement("tr");
+                noResultsRow.innerHTML = `<td colspan="5" style="text-align: center;">No contacts found</td>`;
+                contactList.appendChild(noResultsRow);
+            }
         }
     };
 
     xhr.send(jsonPayload);
+}
+
+// Function to format phone number
+function formatPhoneNumber(phoneNumber) {
+    if (!phoneNumber) return "";
+
+    // Remove non-digits
+    const cleaned = ('' + phoneNumber).replace(/\D/g, '');
+
+    // Format as xxx-xxx-xxxx
+    const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+        return `${match[1]}-${match[2]}-${match[3]}`;
+    }
+
+    return phoneNumber; // Return as-is if not matching expected format
 }
 
 function delay(ms) {
