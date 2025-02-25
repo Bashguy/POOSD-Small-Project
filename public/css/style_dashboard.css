@@ -8,8 +8,12 @@
 
 body {
     background: linear-gradient(135deg, #e0eafc, #cfdef3);
-    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     padding: 20px;
+    color: #333;
 }
 
 /* Top Header */
@@ -37,7 +41,7 @@ body {
     height: 80vh;
 }
 
-/* Left Sidebar */
+/* Left Side (Sidebar) */
 #left-side {
     width: 300px;
     background: linear-gradient(135deg, #6e8efb, #66e9b7);
@@ -49,7 +53,7 @@ body {
 }
 
 #left-side h2 {
-    font-size: 26px;
+    font-size: 28px;
     margin-bottom: 15px;
 }
 
@@ -60,16 +64,16 @@ body {
     border-radius: 10px;
     font-size: 14px;
     background-color: #f9f9f9;
-    transition: border-color 0.3s;
+    transition: 0.3s;
 }
 
 #left-side input:focus {
+    outline: none;
     border-color: #6e8efb;
     box-shadow: 0 0 8px rgba(110, 142, 251, 0.5);
 }
 
 /* Buttons */
-/* Button Styling */
 .btn {
     background: linear-gradient(135deg, #6e8efb, #a777e3);
     color: white;
@@ -79,34 +83,34 @@ body {
     font-weight: 600;
     border-radius: 10px;
     cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: all 0.3s ease;
     margin-top: 10px;
-    display: inline-block;
-    width: auto;
-    max-width: 100%;
-    position: relative;
 }
 
 .btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(110, 142, 251, 0.4);
 }
-
+/* Button Icon Styling */
+#plusIcon {
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
 /* Contacts Table */
 #contacts {
     flex: 1;
     padding: 20px;
     overflow-y: auto;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .contacts-table {
     width: 100%;
-    padding: 10px;
     background-color: white;
     border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
 
 table {
