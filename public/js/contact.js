@@ -311,94 +311,34 @@ function edit() {
 }
 
 //Deletes contacts
-function deleteContact() {
+function deleteContact(contactId) {
+    document.getElementById("contactDeleteResult").innerHTML = "";
 
-	document.getElementById("contactDeleteResult").innerHTML = "";
+    let tmp = { IDnum: userId, id: contactId };
+    let jsonPayload = JSON.stringify(tmp);
 
-	let tmp = {firstName:firstName, lastName:lastName, userId:userId};
-	let jsonPayload = JSON.stringify(tmp);
+    let url = urlBase + "/Delete." + extension;
 
-	let url = urlBase + "/delete." + extension;
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try {
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("contactDeleteResult").innerHTML = "Contact has been deleted";
+            } else {
+                document.getElementById("contactDeleteResult").innerHTML = "Error deleting contact";
+            }
+        };
 
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try {
-
-		xhr.onreadystatechange = function() {
-
-			if (this.readyState == 4 && this.status == 200) {
-
-				document.getElementById("contactDeleteResult").innerHTML = "Contact has been deleted";
-
-			}
-
-		};
-
-		xhr.send(jsonPayload);
-
-	}
-
-	catch(err) {
-
-		document.getElementById("contactDeleteResult").innerHTML = err.message;
+        xhr.send(jsonPayload);
 		
-	}
+		loadContacts(); // Reload contacts after deleting
 
+    } catch (err) {
+        document.getElementById("contactDeleteResult").innerHTML = err.message;
+    }
 }
-
-/*
-async function loadContacts() {
-
-    let url = urlBase + "/getContacts." + extension;
-    let jsonPayload = JSON.stringify({ IDnum: userId });
-
-    fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json; charset=UTF-8" },
-      body: jsonPayload,
-    })
-      .then((response) => response.json())
-      .then((jsonResponse) => {
-        if (jsonResponse.error) {
-          alert("Error: " + jsonResponse.error);
-          return;
-        }
-
-        let contactList = document.getElementById("contactList");
-        contactList.innerHTML = ""; // Clear the table before loading new contacts
-		
-		console.log(jsonResponse.results); //DEBUG
-
-        jsonResponse.results.forEach((contact) => {
-          let row = document.createElement("tr");
-
-          row.innerHTML = `
-                <td>${contact.name}</td>
-                <td>${contact.email}</td>
-                <td>
-                <button class="edit-btn" onclick="window.location.href='EditContact.html?id=${contact.id}'">Edit</button>
-                <button class="delete-btn" onclick="deleteContact(${contact.id})">Delete</button>
-                </td>
-
-            `;
-
-          contactList.appendChild(row);
-        });
-
-        if (jsonResponse.results.length === 0) {
-          let noResultsRow = document.createElement("tr");
-          noResultsRow.innerHTML = `<td colspan="3" style="text-align: center;">No contacts found</td>`;
-          contactList.appendChild(noResultsRow);
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert("An error occurred while loading contacts. Please try again.");
-      });
-  }
-*/
-
 async function loadContacts() {
     await delay(400);
 
@@ -430,7 +370,7 @@ async function loadContacts() {
 			<td>${contacts[i].PhoneNumber}</td>
 			<td>
 				<button class="edit-btn" onclick="window.location.href='EditContact.html?id=${contacts[i].ID}'">Edit</button>
-				<button class="delete-btn" onclick="deleteContact(${contacts[i].ID})">Delete</button>
+				<button onclick="deleteContact(${contacts[i].ID})" id="delete">Delete</button>
 			</td>
                     `;
 
