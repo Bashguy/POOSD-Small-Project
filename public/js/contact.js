@@ -247,7 +247,7 @@ function edit() {
 
 	document.getElementById("contactEditResult").innerHTML = "";
 
-	let tmp = {firstName:contactFirstName, lastName:contactLastName, email:contactEmail, number:contactNumber, userId:userId};
+	let tmp = {id: parseInt(contactId), firstName:contactFirstName, lastName:contactLastName, email:contactEmail, number:contactNumber, IDnum:userId};
 	let jsonPayload = JSON.stringify(tmp);
 
 	let url = urlBase + '/edit.' + extension;
@@ -255,6 +255,7 @@ function edit() {
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
 	try {
 
 		xhr.onreadystatechange = function() {
