@@ -287,6 +287,20 @@ function edit() {
 
 }
 
+// Function to open the modal
+function openModal(contact) {
+    document.getElementById("editFirstname").value = contact.FirstName;
+    document.getElementById("editLastname").value = contact.LastName;
+    document.getElementById("editEmail").value = contact.Email;
+    document.getElementById("editNumber").value = contact.PhoneNumber;
+    document.getElementById("editModal").style.display = "block";
+}
+
+// Function to close the modal
+function closeModal() {
+    document.getElementById("editModal").style.display = "none";
+}
+
 //Deletes contacts
 function deleteContact(contactId) {
     //document.getElementById("contactDeleteResult").innerHTML = "";
@@ -344,7 +358,7 @@ async function loadContacts() {
                     <td>${contacts[i].Email}</td>
                     <td>${formattedNumber}</td>
                     <td>
-                        <button class="edit-btn" onclick="window.location.href='EditContact.html?id=${contacts[i].ID}'">Edit</button>
+                        <button class="edit-btn" onclick='openModal(${JSON.stringify(contacts[i])})'>Edit</button>
                         <button onclick="deleteContact(${contacts[i].ID})" id="delete">Delete</button>
                     </td>
                 `;
