@@ -42,7 +42,7 @@
                     <input type="email" name="Email" id="email" placeholder="Email" required>
                 </div>
                 <div class="input-field">
-                    <input type="tel" pattern="[0-9\-]+" name="Number" id="number" placeholder="Phone Number" required>
+                    <input type="tel" pattern="[0-9\-]+" name="Number" id="number" placeholder="Phone Number" required oninput="formatPhoneInput(this)">
                 </div>
                 <button type = "submit" class = "btn"><img src="../img/plus.png" id = "plusIcon"/>Add Contact</button>
                 <p><br></p>
