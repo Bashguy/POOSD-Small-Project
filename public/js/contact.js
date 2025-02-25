@@ -175,14 +175,6 @@ function add() {
     let contactLastName = document.getElementById("lastname").value;
     let contactEmail = document.getElementById("email").value;
     let contactNumber = document.getElementById("number").value;
-	let cleanedNumber = contactNumber.replace(/\D/g, ''); // Remove non-digits
-
-	if (cleanedNumber.length === 10) {
-		contactNumber = `${cleanedNumber.slice(0, 3)}-${cleanedNumber.slice(3, 6)}-${cleanedNumber.slice(6)}`;
-	} else {
-		alert("Please enter a valid 10-digit phone number.");
-		return;
-	}
 
     document.getElementById("contactAddResult").innerHTML = "";
 
