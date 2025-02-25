@@ -239,48 +239,49 @@ function search() {
 
 //Updates contacts
 function edit() {
+    let contactId = document.getElementById("editContactId").value;
+    let contactFirstName = document.getElementById("editFirstname").value;
+    let contactLastName = document.getElementById("editLastname").value;
+    let contactEmail = document.getElementById("editEmail").value;
+    let contactNumber = document.getElementById("editNumber").value;
 
-	let contactFirstName = document.getElementById("firstName").value;
-	let contactLastName = document.getElementById("lastName").value;
-	let contactEmail = document.getElementById("email").value;
-	let contactNumber = document.getElementById("number").value;
+    document.getElementById("contactEditResult").innerHTML = "";
 
-	document.getElementById("contactEditResult").innerHTML = "";
+    let tmp = {
+        ID: contactId,
+        FirstName: contactFirstName,
+        LastName: contactLastName,
+        Email: contactEmail,
+        PhoneNumber: contactNumber,
+        IDnum: userId
+    };
+    let jsonPayload = JSON.stringify(tmp);
 
-	let tmp = {firstName:contactFirstName, lastName:contactLastName, email:contactEmail, number:contactNumber, userId:userId};
-	let jsonPayload = JSON.stringify(tmp);
+    let url = urlBase + '/Edit.' + extension;
 
-	let url = urlBase + '/edit.' + extension;
-	
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try {
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("contactEditResult").innerHTML = "Contact has been edited";
+                loadContacts(); // Reload contacts after editing
+                closeModal(); // Close the modal
+            } else {
+                document.getElementById("contactEditResult").innerHTML = "Error editing contact";
+            }
+        };
 
-		xhr.onreadystatechange = function() {
-
-			if (this.readyState == 4 && this.status == 200) {
-
-				document.getElementById("contactEditResult").innerHTML = "Contact has been edited";
-
-			}
-
-		};
-
-		xhr.send(jsonPayload);
-
-	}
-
-	catch(err) {
-
-		document.getElementById("contactEditResult").innerHTML = err.message;
-
-	}
-
+        xhr.send(jsonPayload);
+    } catch (err) {
+        document.getElementById("contactEditResult").innerHTML = err.message;
+    }
 }
 
 // Function to open the modal
 function openModal(contact) {
+    document.getElementById("editContactId").value = contact.ID;
     document.getElementById("editFirstname").value = contact.FirstName;
     document.getElementById("editLastname").value = contact.LastName;
     document.getElementById("editEmail").value = contact.Email;
