@@ -245,7 +245,9 @@ function edit() {
     let contactEmail = document.getElementById("editEmail").value;
     let contactNumber = document.getElementById("editNumber").value;
 
-    let tmp = {
+	document.getElementById("contactEditResult").innerHTML = "";
+
+	let tmp = {
         ID: contactId,
         FirstName: contactFirstName,
         LastName: contactLastName,
@@ -255,23 +257,27 @@ function edit() {
     };
     let jsonPayload = JSON.stringify(tmp);
 
-    let url = urlBase + '/Edit.' + extension;
+	document.getElementById("contactEditResult").innerHTML = err.message;
 
-    let xhr = new XMLHttpRequest();
+	let url = urlBase + '/Edit.' + extension;
+	let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
     try {
         xhr.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("contactEditResult").innerHTML = "Contact has been edited";
                 loadContacts(); // Reload contacts after editing
                 closeModal(); // Close the modal
-            } 
+            } else {
+                document.getElementById("contactEditResult").innerHTML = "Error editing contact";
+            }
         };
-
-        xhr.send(jsonPayload);
+		xhr.send(jsonPayload);
     } catch (err) {
-        console.log(err.message);
+        document.getElementById("contactEditResult").innerHTML = err.message;
     }
+
 }
 
 // Function to open the modal
@@ -283,7 +289,6 @@ function openModal(contact) {
     document.getElementById("editNumber").value = contact.PhoneNumber;
     document.getElementById("editModal").style.display = "block";
 }
-
 // Function to close the modal
 function closeModal() {
     document.getElementById("editModal").style.display = "none";
