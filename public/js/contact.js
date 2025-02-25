@@ -250,7 +250,7 @@ function edit() {
 	let tmp = {ID: parseInt(contactId), firstName:contactFirstName, lastName:contactLastName, email:contactEmail, number:contactNumber, IDnum:userId};
 	let jsonPayload = JSON.stringify(tmp);
 
-	let url = urlBase + '/edit.' + extension;
+	let url = urlBase + '/Update.' + extension;
 	
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
