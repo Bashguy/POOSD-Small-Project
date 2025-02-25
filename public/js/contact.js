@@ -169,7 +169,7 @@ function doLogout() {
 
 }
 
-//Creates a new contact
+// Creates a new contact
 function add() {
     let contactFirstName = document.getElementById("firstname").value;
     let contactLastName = document.getElementById("lastname").value;
@@ -197,6 +197,7 @@ function add() {
             if (this.readyState == 4) {
                 if (this.status == 200) {
                     document.getElementById("contactAddResult").innerHTML = "Contact has been added";
+                    clearForm();  // Clear the form fields after successful addition
                     loadContacts(); // Reload contacts after adding
                 } else {
                     document.getElementById("contactAddResult").innerHTML = "Error adding contact";
@@ -205,10 +206,18 @@ function add() {
         };
 
         xhr.send(jsonPayload);
-		loadContacts();
+        loadContacts();
     } catch (err) {
         document.getElementById("contactAddResult").innerHTML = err.message;
     }
+}
+
+// Clear form fields
+function clearForm() {
+    document.getElementById("firstname").value = "";
+    document.getElementById("lastname").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("number").value = "";
 }
 
 //Searches for a contact
