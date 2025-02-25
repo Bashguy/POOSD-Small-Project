@@ -69,6 +69,7 @@ body {
 }
 
 /* Buttons */
+/* Button Styling */
 .btn {
     background: linear-gradient(135deg, #6e8efb, #a777e3);
     color: white;
@@ -80,6 +81,10 @@ body {
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
     margin-top: 10px;
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
+    position: relative;
 }
 
 .btn:hover {
