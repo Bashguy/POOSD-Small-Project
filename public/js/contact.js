@@ -266,8 +266,6 @@ function edit() {
     };
     let jsonPayload = JSON.stringify(tmp);
 
-	document.getElementById("contactEditResult").innerHTML = err.message;
-
 	let url = urlBase + '/Update.' + extension;
 	let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
