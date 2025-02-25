@@ -8,12 +8,8 @@
 
 body {
     background: linear-gradient(135deg, #e0eafc, #cfdef3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
     color: #333;
+    padding: 20px;
 }
 
 /* Top Header */
@@ -41,7 +37,7 @@ body {
     height: 80vh;
 }
 
-/* Left Side (Sidebar) */
+/* Left Sidebar */
 #left-side {
     width: 300px;
     background: linear-gradient(135deg, #6e8efb, #66e9b7);
@@ -53,7 +49,7 @@ body {
 }
 
 #left-side h2 {
-    font-size: 28px;
+    font-size: 26px;
     margin-bottom: 15px;
 }
 
@@ -64,11 +60,10 @@ body {
     border-radius: 10px;
     font-size: 14px;
     background-color: #f9f9f9;
-    transition: 0.3s;
+    transition: border-color 0.3s;
 }
 
 #left-side input:focus {
-    outline: none;
     border-color: #6e8efb;
     box-shadow: 0 0 8px rgba(110, 142, 251, 0.5);
 }
@@ -83,7 +78,7 @@ body {
     font-weight: 600;
     border-radius: 10px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: transform 0.3s, box-shadow 0.3s;
     margin-top: 10px;
 }
 
@@ -103,14 +98,16 @@ body {
     flex: 1;
     padding: 20px;
     overflow-y: auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .contacts-table {
     width: 100%;
+    padding: 10px;
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
 }
 
 table {
