@@ -138,23 +138,21 @@ function doRegister()
         // If “Username already exists,” show a special popup
         if (json.error.includes("Username already exists"))
         {
-          alert("An account with that username already exists. Please choose another username.");
+          console.log("An account with that username already exists. Please choose another username.");
         } 
         else
         {
           // Otherwise return error
-          alert("Error: " + json.error);
+          console.log("Error: " + json.error);
         }
       } 
       else 
       {
-        alert("Registration successful! Please login");
-        // Optionally redirect after success:
-        // window.location.href = "login.html";
+        window.location.href = "login.html";
       }
     })
     .catch((err) => {
-      alert("Error: " + err);
+      console.log("Error: " + err);
     });
 }
 
