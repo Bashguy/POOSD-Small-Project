@@ -189,15 +189,12 @@ function add() {
 
     let url = urlBase + '/Create.' + extension;
 
-    console.log("Sending data to server:", jsonPayload); // Debugging statement
-
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
     try {
         xhr.onreadystatechange = function() {
             if (this.readyState == 4) {
-                console.log("Server response:", this.responseText); // Debugging statement
                 if (this.status == 200) {
                     document.getElementById("contactAddResult").innerHTML = "Contact has been added";
                     loadContacts(); // Reload contacts after adding
@@ -217,7 +214,6 @@ function add() {
 //Searches for a contact
 function search() {
     let searchContact = document.getElementById("searchText").value.toLowerCase();
-    document.getElementById("contactSearchResult").innerHTML = "";
 
     let contactList = document.getElementById("contactList");
     let rows = contactList.getElementsByTagName("tr");
@@ -238,12 +234,6 @@ function search() {
         } else {
             rows[i].style.display = "none";
         }
-    }
-
-    if (searchContact === "") {
-        document.getElementById("contactSearchResult").innerHTML = "Please enter a search term.";
-    } else {
-        document.getElementById("contactSearchResult").innerHTML = "Search results updated.";
     }
 }
 
@@ -333,9 +323,7 @@ async function loadContacts() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let contacts = JSON.parse(xhr.responseText);
-            console.log(xhr.responseText);
-	    console.log(contacts);
-
+        
                 let contactList = document.getElementById("contactList");
                 contactList.innerHTML = ""; // Clear the table before loading new contacts
 
@@ -374,7 +362,6 @@ function delay(ms) {
 window.onload = function () {
     if (window.location.pathname.endsWith('contacts.html')) {
         readCookie(); // Ensure `userId` is read
-	console.log("User ID: " + userId); //DEBUG
         if (userId > 0) {
             loadContacts();
         }
