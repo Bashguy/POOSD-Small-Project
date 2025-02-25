@@ -88,8 +88,12 @@ body {
     box-shadow: 0 5px 15px rgba(110, 142, 251, 0.4);
 }
 /* Fine-tuned Search Button Margin */
-#searchText + .btn {
-    margin-top: 5px; /* Specific adjustment for search button only */
+#searchText {
+    margin-bottom: 5px; 
+}
+
+#searchText + button.btn {
+    margin-top: 0px; 
 }
 /* Button Icon Styling */
 #plusIcon {
